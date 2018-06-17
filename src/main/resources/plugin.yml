@@ -1,0 +1,6 @@
+name: 'EnchantsPlugin'
+version: ${project.version}
+main: 'xyz.yooniks.enchants.EnchantsPlugin'
+authors: [yooniks]
+description: 'Now you can choose enchants for your items!'
+website: 'www.youtube.com/c/Enchanted3'

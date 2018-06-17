@@ -1,0 +1,15 @@
+bookItems:
+  sharp1:
+    slot: 0
+    item:
+      name: "&6&lENCHANT SHARPNESS 1"
+      lore:
+        - "&7Koszt:"
+        - "  &7Biblioteczek: &63"
+        - "  &7Level: &62"
+        - " "
+        - "&e&l&nKliknij, aby kupic!"
+    cost:
+      bookshelfs: 3
+      level: 2
+    enchant: DAMAGE_ALL;5
