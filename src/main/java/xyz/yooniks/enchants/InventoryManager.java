@@ -20,14 +20,14 @@ public class InventoryManager {
     this.items = items;
   }
 
-  public Inventory getInventory(Player player, int bookshelfs) {
+  public Inventory getInventory(Player player, int bookshelves) {
     final Inventory inv = Bukkit.createInventory(player, this.size,
-        StringUtils.replace(this.name, "%bookshelves%", String.valueOf(bookshelfs)));
+        StringUtils.replace(this.name, "%bookshelves%", String.valueOf(bookshelves)));
 
     this.items.stream()
 
         .filter(bookItem ->
-            bookshelfs >= bookItem.getBookshelves()
+            bookshelves >= bookItem.getBookshelves()
                 && player.getLevel() >= bookItem.getLevel())
 
         .forEach(bookItem ->

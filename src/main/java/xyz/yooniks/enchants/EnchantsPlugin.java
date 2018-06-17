@@ -15,7 +15,7 @@ public final class EnchantsPlugin extends JavaPlugin {
     this.saveDefaultConfig();
 
     final String inventoryName = ChatColor.translateAlternateColorCodes('&',
-        "&7Enchant GUI &c%bookshelfs% biblioteczek");
+        "&7Enchant GUI &c%bookshelves% biblioteczek");
     final int inventorySize = 9 * 6;
 
     this.inventoryManager = new InventoryManager(inventoryName, inventorySize,
