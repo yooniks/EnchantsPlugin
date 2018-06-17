@@ -30,58 +30,59 @@ public class InventoryListener implements Listener {
     if (inv.getType() == InventoryType.ENCHANTING) {
       e.setCancelled(true);
 
-      final Player p = ((Player) e.getPlayer());
-      p.openInventory(
-          this.inventoryManager.getInventory(p,
-              this.getBookshelfs(p.getLocation(), 10)) //how about this radius?
+      final Player player = ((Player) e.getPlayer());
+      player.openInventory(
+          this.inventoryManager.getInventory(player,
+              this.getBookshelfs(player.getLocation(), 10)) //how about this radius?
       );
     }
   }
 
   @EventHandler(ignoreCancelled = true)
-  public void onInventoryClick(InventoryClickEvent e) {
-    if (e.getInventory() == null || e.getClickedInventory() == null ||
-        !(e.getWhoClicked() instanceof Player)) {
+  public void onInventoryClick(InventoryClickEvent event) {
+    if (event.getInventory() == null || event.getClickedInventory() == null ||
+        !(event.getWhoClicked() instanceof Player)) {
       return;
     }
 
-    if (!e.getClickedInventory().getTitle().equalsIgnoreCase(this.inventoryManager.getName())) {
+    if (!event.getClickedInventory().getTitle().equalsIgnoreCase(this.inventoryManager.getName())) {
       return;
     }
-    if (e.getCurrentItem() == null || !e.getCurrentItem().hasItemMeta()) {
-      return;
-    }
-
-    final Player p = ((Player) e.getWhoClicked());
-    if (p.getInventory().getItemInHand() == null) {
-      p.sendMessage("Musisz trzymac cos w rece!");
-      p.closeInventory();
+    if (event.getCurrentItem() == null || !event.getCurrentItem().hasItemMeta()) {
       return;
     }
 
-    final int bookshelfs = Integer.parseInt(e.getClickedInventory().getTitle().split("&c")[0]);
+    final Player player = ((Player) event.getWhoClicked());
+    if (player.getInventory().getItemInHand() == null) {
+      player.sendMessage("Musisz trzymac cos w rece!");
+      player.closeInventory();
+      return;
+    }
+
+    final int bookshelfs = Integer.parseInt(event.getClickedInventory().getTitle().split("&c")[0]);
 
     for (BookItem bookItem : this.inventoryManager.getItems()) {
-      if (bookItem.getSlot() == e.getSlot()) {
-        if (p.getLevel() < bookItem.getLevel()) {
-          p.sendMessage("Potrzebujesz: " + bookItem.getLevel() + " lvl'a do zakupu tego enchantu!");
+      if (bookItem.getSlot() == event.getSlot()) {
+        if (player.getLevel() < bookItem.getLevel()) {
+          player.sendMessage(
+              "Potrzebujesz: " + bookItem.getLevel() + " lvl'a do zakupu tego enchantu!");
           return;
         } else if (bookshelfs < bookItem.getBookshelfs()) {
-          p.sendMessage("Potrzebujesz: " + bookItem.getBookshelfs()
+          player.sendMessage("Potrzebujesz: " + bookItem.getBookshelfs()
               + " biblioteczek wokol stolu do zaklinania!");
           return;
         }
 
-        p.setLevel(p.getLevel() - bookItem.getLevel());
+        player.setLevel(player.getLevel() - bookItem.getLevel());
 
         final BookEnchantment bookEnchantment = bookItem.getEnchantment();
 
-        p.getInventory().getItemInHand().getItemMeta().addEnchant(
+        player.getInventory().getItemInHand().getItemMeta().addEnchant(
             bookEnchantment.getEnchantment(), bookEnchantment.getLevel(), true);
 
-        p.sendMessage("Zakupiles enchant: " + bookItem.getLevel());
+        player.sendMessage("Zakupiles enchant: " + bookItem.getLevel());
 
-        p.closeInventory();
+        player.closeInventory();
         return;
       }
     }

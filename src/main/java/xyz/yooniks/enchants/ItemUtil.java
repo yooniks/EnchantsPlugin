@@ -15,7 +15,7 @@ public final class ItemUtil {
 
   public static ItemStack fromSection(ConfigurationSection section) {
     final ItemStack item = new ItemStack(Material.GRASS);
-    final ItemMeta im = item.getItemMeta();
+    final ItemMeta meta = item.getItemMeta();
 
     if (section.isString("material")) {
       final Material material = Material.getMaterial(section.getString("material"));
@@ -31,10 +31,10 @@ public final class ItemUtil {
           .forEach(string ->
               lore.add(ChatColor.translateAlternateColorCodes('&', string)));
 
-      im.setLore(lore);
+      meta.setLore(lore);
     }
     if (section.isString("name")) {
-      im.setDisplayName(ChatColor.translateAlternateColorCodes('&', section.getString("name")));
+      meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', section.getString("name")));
     }
     if (section.isInt("amount")) {
       item.setAmount(section.getInt("amount"));
@@ -43,7 +43,7 @@ public final class ItemUtil {
       item.setDurability((short) section.getInt("data", section.getInt("durability")));
     }
 
-    item.setItemMeta(im);
+    item.setItemMeta(meta);
     return item;
   }
 
