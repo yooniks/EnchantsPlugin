@@ -33,7 +33,7 @@ public class InventoryListener implements Listener {
       final Player player = ((Player) e.getPlayer());
       player.openInventory(
           this.inventoryManager.getInventory(player,
-              this.getBookshelfs(player.getLocation(), 10)) //how about this radius?
+              this.getBookshelvesAmount(player.getLocation(), 10)) //how about this radius?
       );
     }
   }
@@ -67,8 +67,8 @@ public class InventoryListener implements Listener {
           player.sendMessage(
               "Potrzebujesz: " + bookItem.getLevel() + " lvl'a do zakupu tego enchantu!");
           return;
-        } else if (bookshelfs < bookItem.getBookshelfs()) {
-          player.sendMessage("Potrzebujesz: " + bookItem.getBookshelfs()
+        } else if (bookshelfs < bookItem.getBookshelves()) {
+          player.sendMessage("Potrzebujesz: " + bookItem.getBookshelves()
               + " biblioteczek wokol stolu do zaklinania!");
           return;
         }
@@ -88,7 +88,7 @@ public class InventoryListener implements Listener {
     }
   }
 
-  private int getBookshelfs(Location location, int radius) {
+  private int getBookshelvesAmount(Location location, int radius) {
     int count = 0;
     for (int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
       for (int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {

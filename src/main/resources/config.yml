@@ -10,6 +10,6 @@ bookItems:
         - " "
         - "&e&l&nKliknij, aby kupic!"
     cost:
-      bookshelfs: 3
+      bookshelves: 3
       level: 2
     enchant: DAMAGE_ALL;5

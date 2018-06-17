@@ -22,12 +22,12 @@ public class InventoryManager {
 
   public Inventory getInventory(Player player, int bookshelfs) {
     final Inventory inv = Bukkit.createInventory(player, this.size,
-        StringUtils.replace(this.name, "%bookshelfs%", String.valueOf(bookshelfs)));
+        StringUtils.replace(this.name, "%bookshelves%", String.valueOf(bookshelfs)));
 
     this.items.stream()
 
         .filter(bookItem ->
-            bookshelfs >= bookItem.getBookshelfs()
+            bookshelfs >= bookItem.getBookshelves()
                 && player.getLevel() >= bookItem.getLevel())
 
         .forEach(bookItem ->
@@ -48,15 +48,15 @@ public class InventoryManager {
 
     private final int slot;
     private final ItemStack item;
-    private final int level, bookshelfs;
+    private final int level, bookshelves;
     private final BookEnchantment enchantment;
 
-    public BookItem(int slot, ItemStack item, int level, int bookshelfs,
+    public BookItem(int slot, ItemStack item, int level, int bookshelves,
         BookEnchantment enchantment) {
       this.slot = slot;
       this.item = item;
       this.level = level;
-      this.bookshelfs = bookshelfs;
+      this.bookshelves = bookshelves;
       this.enchantment = enchantment;
     }
 
@@ -73,7 +73,7 @@ public class InventoryManager {
           .stream()
           .map(text -> ChatColor.translateAlternateColorCodes('&', text))
           .map(text -> StringUtils.replace(text, "{LEVEL}", String.valueOf(this.level)))
-          .map(text -> StringUtils.replace(text, "{BOOKSHELFS}", String.valueOf(this.bookshelfs)))
+          .map(text -> StringUtils.replace(text, "{BOOKSHELFS}", String.valueOf(this.bookshelves)))
           .forEach(newLore::add);
 
       im.setLore(newLore);
@@ -86,8 +86,8 @@ public class InventoryManager {
       return level;
     }
 
-    public int getBookshelfs() {
-      return bookshelfs;
+    public int getBookshelves() {
+      return bookshelves;
     }
 
     public BookEnchantment getEnchantment() {

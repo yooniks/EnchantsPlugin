@@ -27,7 +27,7 @@ public final class EnchantsPlugin extends JavaPlugin {
                     section.getInt("item.slot"),
                     ItemUtil.fromSection(section.getConfigurationSection("item")),
                     section.getInt("cost.level"),
-                    section.getInt("cost.bookshelfs"),
+                    section.getInt("cost.bookshelves"),
                     BookEnchantment.getByString(section.getString("enchant")))
             ).collect(Collectors.toList()));
 
