@@ -72,8 +72,6 @@ public class InventoryManager {
       im.getLore()
           .stream()
           .map(text -> ChatColor.translateAlternateColorCodes('&', text))
-          .map(text -> StringUtils.replace(text, "{LEVEL}", String.valueOf(this.level)))
-          .map(text -> StringUtils.replace(text, "{BOOKSHELFS}", String.valueOf(this.bookshelves)))
           .forEach(newLore::add);
 
       im.setLore(newLore);
