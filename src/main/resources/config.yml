@@ -4,11 +4,11 @@ bookItems:
     item:
       name: "&6&lENCHANT SHARPNESS 1"
       lore:
-        - "&7Koszt:"
-        - "  &7Biblioteczek: &63"
+        - "&7Cost:"
+        - "  &7Bookshelves: &63"
         - "  &7Level: &62"
         - " "
-        - "&e&l&nKliknij, aby kupic!"
+        - "&e&l&nClick to buy!"
     cost:
       bookshelves: 3
       level: 2

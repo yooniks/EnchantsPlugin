@@ -1,5 +1,6 @@
 package xyz.yooniks.enchants;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -54,7 +55,7 @@ public class InventoryListener implements Listener {
 
     final Player player = ((Player) event.getWhoClicked());
     if (player.getInventory().getItemInHand() == null) {
-      player.sendMessage("Musisz trzymac cos w rece!");
+      player.sendMessage(ChatColor.DARK_RED + "You have to hold something in hand!");
       player.closeInventory();
       return;
     }
@@ -64,12 +65,12 @@ public class InventoryListener implements Listener {
     for (BookItem bookItem : this.inventoryManager.getItems()) {
       if (bookItem.getSlot() == event.getSlot()) {
         if (player.getLevel() < bookItem.getLevel()) {
-          player.sendMessage(
-              "Potrzebujesz: " + bookItem.getLevel() + " lvl'a do zakupu tego enchantu!");
+          player.sendMessage(ChatColor.DARK_RED +
+              "You need: " + bookItem.getLevel() + " level to buy this enchant!!");
           return;
         } else if (bookshelfs < bookItem.getBookshelves()) {
-          player.sendMessage("Potrzebujesz: " + bookItem.getBookshelves()
-              + " biblioteczek wokol stolu do zaklinania!");
+          player.sendMessage(ChatColor.DARK_RED + "You need: " + bookItem.getBookshelves()
+              + " bookshelves around the enchant!");
           return;
         }
 
@@ -80,7 +81,9 @@ public class InventoryListener implements Listener {
         player.getInventory().getItemInHand().getItemMeta().addEnchant(
             bookEnchantment.getEnchantment(), bookEnchantment.getLevel(), true);
 
-        player.sendMessage("Zakupiles enchant: " + bookItem.getLevel());
+        player.sendMessage(ChatColor.GREEN + "You have bought enchant: "
+            + bookEnchantment.getEnchantment().getName() + ":" + bookEnchantment.getLevel());
+        player.sendMessage(ChatColor.GOLD + "That took you " + bookItem.getLevel() + " levels!");
 
         player.closeInventory();
         return;
